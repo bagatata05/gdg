@@ -22,6 +22,8 @@ export interface Recipe {
   ingredients: Ingredient[];
   steps: string[];
   requiredKeyItems?: string[];
+  isMock?: boolean;
+  fallbackError?: string;
 }
 
 // Real-world Philippine market price dictionary (NCR Wet Market & Supermarket benchmarks as of 2026)
@@ -355,7 +357,8 @@ export const generateMockRecipes = (budget: number, people: number, ingredientsS
   return finalResults
     .filter(recipe => recipe.totalCost <= budget + 25)
     .sort((a, b) => b.ownedCount - a.ownedCount || a.totalCost - b.totalCost)
-    .slice(0, 3);
+    .slice(0, 3)
+    .map(r => ({ ...r, isMock: true }));
 };
 
 export const generateRecipes = async (
@@ -475,8 +478,13 @@ interface Recipe {
         steps: recipe.steps || ["Mix ingredients.", "Cook.", "Serve warm with rice."]
       };
     });
-  } catch (error) {
-    console.error("Gemini API error:", error);
-    throw error;
+  } catch (error: any) {
+    console.error("Gemini API error, falling back to mock recipes:", error);
+    const mockRecipes = generateMockRecipes(budget, people, ingredients);
+    return mockRecipes.map(recipe => ({
+      ...recipe,
+      isMock: true,
+      fallbackError: error?.message || String(error)
+    }));
   }
 };
