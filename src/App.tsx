@@ -15,6 +15,7 @@ function App() {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [isFirstSearch, setIsFirstSearch] = useState<boolean>(true);
+  const [fallbackWarning, setFallbackWarning] = useState<string | null>(null);
 
   // Check if API Key is configured in the .env file
   const hasApiKey = !!import.meta.env.VITE_GEMINI_API_KEY;
@@ -56,11 +57,15 @@ function App() {
 
     setLoading(true);
     setError(null);
+    setFallbackWarning(null);
     setIsFirstSearch(false);
 
     try {
       const results = await generateRecipes(budget, people, ingredients);
       setRecipes(results);
+      if (results.length > 0 && results[0].fallbackError) {
+        setFallbackWarning(results[0].fallbackError);
+      }
       if (results.length === 0) {
         setError(
           "We couldn't find any recipes fitting your budget. Try increasing your budget or listing more ingredients!",
@@ -282,6 +287,32 @@ function App() {
           {/* Recipe List */}
           {!loading && recipes.length > 0 && (
             <div>
+              {fallbackWarning && (
+                <div
+                  style={{
+                    backgroundColor: "var(--color-accent-gold-light)",
+                    color: "var(--color-accent-gold)",
+                    padding: "1rem 1.5rem",
+                    borderRadius: "var(--radius-lg)",
+                    marginBottom: "1.5rem",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "0.75rem",
+                    border: "1px solid rgba(217, 119, 6, 0.2)",
+                  }}
+                >
+                  <AlertCircle size={20} style={{ flexShrink: 0 }} />
+                  <div>
+                    <strong style={{ display: "block", fontSize: "0.95rem" }}>
+                      Gemini API Error (Fell back to Mock Recipes)
+                    </strong>
+                    <span style={{ fontSize: "0.85rem" }}>
+                      The API query failed: "{fallbackWarning}". Showing realistic mock recipes matching your staples instead.
+                    </span>
+                  </div>
+                </div>
+              )}
+
               <div className="results-header">
                 <div>
                   <h2
