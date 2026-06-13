@@ -1,0 +1,746 @@
+/* Custom Design System: Modern Carinderia Chic */
+:root {
+  /* Color Palette */
+  --color-bg-cream: #FAF6EE;
+  --color-card-white: #FFFFFF;
+  --color-primary-terracotta: #C2410C;
+  --color-primary-hover: #EA580C;
+  --color-primary-light: #FFEDD5;
+  --color-accent-green: #15803D;
+  --color-accent-green-hover: #166534;
+  --color-accent-green-light: #DCFCE7;
+  --color-accent-gold: #D97706;
+  --color-accent-gold-light: #FEF3C7;
+  
+  /* Neutral scale */
+  --color-text-dark: #1E293B;
+  --color-text-muted: #475569;
+  --color-text-light: #64748B;
+  --color-border: #E2E8F0;
+  
+  /* System colors */
+  --color-error: #DC2626;
+  --color-error-light: #FEE2E2;
+  
+  /* Typography */
+  --font-headings: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  
+  /* Shadows & Effects */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(194, 65, 12, 0.08), 0 2px 4px -2px rgba(194, 65, 12, 0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(194, 65, 12, 0.1), 0 4px 6px -4px rgba(194, 65, 12, 0.08);
+  --shadow-xl: 0 20px 25px -5px rgba(194, 65, 12, 0.12), 0 8px 10px -6px rgba(194, 65, 12, 0.08);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+  
+  /* Transition durations */
+  --transition-fast: 150ms;
+  --transition-normal: 250ms;
+}
+
+/* Base resets & styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  background-color: var(--color-bg-cream);
+  color: var(--color-text-dark);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-headings);
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--color-text-dark);
+}
+
+p {
+  color: var(--color-text-muted);
+}
+
+/* Accessibility: Focus rings */
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--color-accent-gold);
+  outline-offset: 2px;
+}
+
+/* App container layout */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+  background-image: radial-gradient(var(--color-primary-light) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Navigation bar */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(250, 246, 238, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(194, 65, 12, 0.15);
+  padding: 1rem 1.5rem;
+  transition: background var(--transition-fast) ease;
+}
+
+.navbar-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+}
+
+.brand-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--color-primary-terracotta);
+  color: var(--color-card-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.25rem;
+  box-shadow: var(--shadow-md);
+  border: 2px solid var(--color-card-white);
+}
+
+.brand-text {
+  font-size: 1.5rem;
+  font-family: var(--font-headings);
+  font-weight: 800;
+  background: linear-gradient(to right, var(--color-primary-terracotta), var(--color-accent-gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.brand-tagline {
+  font-size: 0.75rem;
+  color: var(--color-accent-green);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Core Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  border-radius: var(--radius-md);
+  font-family: var(--font-headings);
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition-fast) cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-sm);
+  text-decoration: none;
+}
+
+.btn-primary {
+  background-color: var(--color-primary-terracotta);
+  color: var(--color-card-white);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background-color: var(--color-card-white);
+  border-color: var(--color-border);
+  color: var(--color-text-dark);
+}
+
+.btn-secondary:hover {
+  background-color: rgba(194, 65, 12, 0.04);
+  border-color: rgba(194, 65, 12, 0.3);
+  color: var(--color-primary-terracotta);
+}
+
+.btn-accent-green {
+  background-color: var(--color-accent-green);
+  color: var(--color-card-white);
+}
+
+.btn-accent-green:hover {
+  background-color: var(--color-accent-green-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-icon-only {
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border-radius: var(--radius-md);
+  background: var(--color-card-white);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast) ease;
+}
+
+.btn-icon-only:hover {
+  color: var(--color-primary-terracotta);
+  border-color: rgba(194, 65, 12, 0.3);
+  background-color: rgba(194, 65, 12, 0.03);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Main Layout Grid */
+.main-layout {
+  flex: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .main-layout {
+    grid-template-columns: 380px 1fr;
+    align-items: start;
+  }
+}
+
+/* Cards (Modern Carinderia Glassmorphism) */
+.card {
+  background: var(--color-card-white);
+  border: 1px solid rgba(194, 65, 12, 0.12);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-md);
+  transition: transform var(--transition-normal) cubic-bezier(0.34, 1.56, 0.64, 1), 
+              box-shadow var(--transition-normal) ease;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.card-title {
+  font-size: 1.25rem;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-bottom: 2px dashed rgba(194, 65, 12, 0.15);
+  padding-bottom: 0.75rem;
+  color: var(--color-primary-terracotta);
+}
+
+/* Inputs & Form Groups */
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-label {
+  display: block;
+  font-weight: 600;
+  font-family: var(--font-headings);
+  font-size: 0.9rem;
+  color: var(--color-text-dark);
+  margin-bottom: 0.5rem;
+}
+
+.input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 0.75rem;
+  color: var(--color-text-light);
+  pointer-events: none;
+}
+
+.input-control {
+  width: 100%;
+  padding: 0.75rem 0.75rem 0.75rem 2.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  background-color: var(--color-bg-cream);
+  color: var(--color-text-dark);
+  transition: border-color var(--transition-fast) ease, box-shadow var(--transition-fast) ease;
+}
+
+.input-control:focus {
+  border-color: var(--color-primary-terracotta);
+  background-color: var(--color-card-white);
+  box-shadow: 0 0 0 3px rgba(194, 65, 12, 0.15);
+}
+
+.textarea-control {
+  height: 100px;
+  resize: none;
+}
+
+/* Pantry staples select buttons grid */
+.staples-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.staple-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  background: var(--color-card-white);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  transition: all var(--transition-fast) ease;
+}
+
+.staple-tag:hover {
+  border-color: var(--color-primary-terracotta);
+  color: var(--color-primary-terracotta);
+  background-color: var(--color-primary-light);
+}
+
+.staple-tag.active {
+  background-color: var(--color-accent-green-light);
+  border-color: var(--color-accent-green);
+  color: var(--color-accent-green);
+  font-weight: 600;
+}
+
+/* Settings modal/drawer */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(30, 41, 59, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 1.5rem;
+}
+
+.modal-content {
+  background: var(--color-card-white);
+  border-radius: var(--radius-lg);
+  max-width: 500px;
+  width: 100%;
+  padding: 2rem;
+  box-shadow: var(--shadow-xl);
+  border: 1px solid rgba(194, 65, 12, 0.2);
+  position: relative;
+  animation: modalSlideIn var(--transition-normal) cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes modalSlideIn {
+  from {
+    transform: translateY(24px) scale(0.96);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+.modal-close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  background: transparent;
+  border: none;
+  color: var(--color-text-light);
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color var(--transition-fast) ease, color var(--transition-fast) ease;
+}
+
+.modal-close:hover {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary-terracotta);
+}
+
+/* API status banner */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.status-pill-mock {
+  background-color: var(--color-accent-gold-light);
+  color: var(--color-accent-gold);
+  border: 1px solid rgba(217, 119, 6, 0.2);
+}
+
+.status-pill-real {
+  background-color: var(--color-accent-green-light);
+  color: var(--color-accent-green);
+  border: 1px solid rgba(21, 128, 61, 0.2);
+}
+
+/* Recipes Layout Area */
+.results-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .results-grid {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  }
+}
+
+/* Recipe Card details */
+.recipe-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.recipe-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.recipe-title {
+  font-family: var(--font-headings);
+  font-size: 1.35rem;
+  color: var(--color-text-dark);
+}
+
+.recipe-cost-badge {
+  background: var(--color-primary-light);
+  color: var(--color-primary-terracotta);
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(194, 65, 12, 0.2);
+  white-space: nowrap;
+}
+
+.recipe-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  padding: 0.6rem 0.8rem;
+  background-color: var(--color-bg-cream);
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.recipe-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.recipe-section-title {
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-accent-gold);
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.ingredients-list {
+  list-style: none;
+  margin-bottom: 1.25rem;
+}
+
+.ingredient-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0;
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+}
+
+.ingredient-item.owned {
+  color: var(--color-text-light);
+  text-decoration: line-through;
+}
+
+.steps-list {
+  margin-bottom: 1.5rem;
+  padding-left: 1.25rem;
+}
+
+.step-item {
+  padding-bottom: 0.75rem;
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+}
+
+.step-item::marker {
+  color: var(--color-primary-terracotta);
+  font-weight: 800;
+}
+
+.nutrition-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  margin-top: auto;
+  border-top: 1px solid var(--color-border);
+  padding-top: 1rem;
+  text-align: center;
+}
+
+.nutrition-item {
+  background: rgba(194, 65, 12, 0.03);
+  padding: 0.4rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(194, 65, 12, 0.06);
+}
+
+.nutrition-value {
+  font-weight: 700;
+  color: var(--color-text-dark);
+  font-size: 0.9rem;
+}
+
+.nutrition-label {
+  font-size: 0.75rem;
+  color: var(--color-text-light);
+}
+
+/* Empty & Loading States */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4rem 2rem;
+  background: var(--color-card-white);
+  border: 2px dashed rgba(194, 65, 12, 0.2);
+  border-radius: var(--radius-lg);
+  max-width: 500px;
+  margin: 3rem auto;
+}
+
+.empty-state-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--color-primary-light);
+  color: var(--color-primary-terracotta);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.empty-state h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 2rem;
+}
+
+.spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid var(--color-primary-light);
+  border-top-color: var(--color-primary-terracotta);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1.5rem;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading-text {
+  font-family: var(--font-headings);
+  font-weight: 600;
+  color: var(--color-primary-terracotta);
+  font-size: 1.1rem;
+}
+
+/* Toast Notification */
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 150;
+  background: var(--color-text-dark);
+  color: var(--color-card-white);
+  padding: 0.85rem 1.5rem;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-xl);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.95rem;
+  animation: toastFadeIn var(--transition-normal) cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes toastFadeIn {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Footer styling */
+.footer {
+  margin-top: auto;
+  border-top: 1px solid rgba(194, 65, 12, 0.15);
+  background: rgba(250, 246, 238, 0.6);
+  padding: 1.5rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footer-credit {
+  font-weight: 600;
+  color: var(--color-primary-terracotta);
+}
+
+/* Environment Warning Banner */
+.env-warning-banner {
+  background-color: var(--color-accent-gold-light);
+  border-bottom: 1px solid rgba(217, 119, 6, 0.25);
+  color: var(--color-accent-gold);
+  padding: 0.75rem 1.5rem;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-align: center;
+  line-height: 1.4;
+  box-shadow: var(--shadow-sm);
+  animation: slideDown 0.3s ease-out;
+}
+
+.env-warning-banner code {
+  background: rgba(217, 119, 6, 0.1);
+  padding: 0.1rem 0.3rem;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
